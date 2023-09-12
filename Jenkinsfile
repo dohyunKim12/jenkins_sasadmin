@@ -37,7 +37,7 @@ pipeline {
             steps {
                echo "${version}"
                sh 'chmod +x ./gradlew'
-               sh "./gradlew clean build jenkins -PbuildVersion=${version} -PcommitId=${commitId}"
+               sh "./gradlew clean jenkins -PbuildVersion=${version} -PcommitId=${commitId}"
            }
         }
         stage('Upload to ftp server') {
