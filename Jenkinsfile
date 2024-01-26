@@ -3,7 +3,7 @@ pipeline {
     environment {
         gitUrl = "192.168.1.150:10081/superobject/super-app-admin.git"
         gitCred = "Rbxxb7pBtyw6D_KqbNWa"
-        gitBranch = "release-0.3.6"
+        gitBranch = "master"
         version = "${params.version}"
     }
     stages {
