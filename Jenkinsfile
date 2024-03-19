@@ -42,8 +42,8 @@ pipeline {
         }
         stage('Upload to ftp server') {
             steps {
-                sh "sudo scp -r ./bin/libs/sasctl-${version}.jar ck-ftp@172.22.4.105:/backups/super-app-runtime/super-app-runtime-${version}/sasctl-${version}.jar"
                 sh "sudo scp -r ./bin/libs/sasctl-${version}.jar root@192.168.9.12:/root/apache2-data/binary/super-app-runtime/super-app-runtime-${version}/sasctl-${version}.jar"
+                sh "sudo scp -r ./bin/libs/sasctl-${version}.jar ck-ftp@172.22.4.105:/backups/super-app-runtime/super-app-runtime-${version}/sasctl-${version}.jar"
            }
         }
         stage('Git Push') {
