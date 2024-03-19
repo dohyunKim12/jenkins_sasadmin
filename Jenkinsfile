@@ -1,7 +1,7 @@
 pipeline {
     agent any 
     environment {
-        gitUrl = "172.21.3.8:10081/superobject/super-app-admin.git"
+        gitUrl = "192.168.1.150:10081/superobject/super-app-admin.git"
         gitCred = "Rbxxb7pBtyw6D_KqbNWa"
         gitBranch = "master"
         version = "${params.version}"
