@@ -3,7 +3,7 @@ pipeline {
     environment {
         gitUrl = "192.168.1.150:10081/superobject/super-app-admin.git"
         gitCred = "Rbxxb7pBtyw6D_KqbNWa"
-        gitBranch = "master"
+        gitBranch = "${params.GitBranch}"
         version = "${params.version}"
     }
     stages {
@@ -24,12 +24,17 @@ pipeline {
             steps {
                 sh 'git fetch --all'
                script {
-                    echo "****************************************This is master!*********************************"
-                    sh "git checkout -b release-${version}"
-                    commitId = sh(returnStdout: true, script: "git log | head -1 | cut -b 7-15")
-                    commitId = commitId.substring(1)
-                    tagName = "release-${version}"
-                    sh "git tag -a ${tagName} -m 'Version ${version} update'"
+                   if ("${gitBranch}" == 'master') {
+                       echo "****************************************master*********************************"
+                       sh "git checkout -b release-${version}"
+                       gitBranch = "release-${version}"
+                   } else {
+                       echo "****************************************${gitBranch}!***********************************"
+                   }
+                   commitId = sh(returnStdout: true, script: "git log | head -1 | cut -b 7-15")
+                   commitId = commitId.substring(1)
+                   tagName = "release-v${version}"
+                   sh "git tag -a ${tagName} -m 'Version ${version} update'"
                 }
             }
         }
