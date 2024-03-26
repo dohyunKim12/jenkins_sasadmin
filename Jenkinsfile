@@ -49,7 +49,7 @@ pipeline {
             steps {
                 dirVersion = "${version}"
                 if ("${version}".contains("fix")) {
-                    dirVersion = "${version}".split("fix")[0].replaceAll("\\.$", "")
+                    dirVersion = dirVersion.split("fix")[0].dropRight(1)
                 }
                 sh "sudo scp -r ./bin/libs/sasctl-${version}.jar root@192.168.9.12:/root/apache2-data/binary/super-app-runtime/super-app-runtime-${dirVersion}/sasctl-${version}.jar"
                 sh "sudo scp -r ./bin/libs/sasctl-${version}.jar ck-ftp@172.22.4.105:/backups/super-app-runtime/super-app-runtime-${dirVersion}/sasctl-${version}.jar || true"
